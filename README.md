@@ -18,7 +18,15 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```consol
+$ es2bulk --help
+Usage: es2bulk [options]
+    -i, --index_pattern PATTERN
+    -h, --host ES_HOST
+    -p, --port ES_PORT
+        --without-id
+$ es2bulk -h 192.168.0.3 -p 9200 -i test_index > test_index_bulk.json
+```
 
 ## Development
 
@@ -37,4 +45,3 @@ The gem is available as open source under the terms of the [MIT License](https:/
 ## Code of Conduct
 
 Everyone interacting in the Es2bulk project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/es2bulk/blob/master/CODE_OF_CONDUCT.md).
->>>>>>> 0f777b0... initial commit

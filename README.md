@@ -29,11 +29,9 @@ $ es2bulk -i test > test_index.json
 $ cat test_bulk.json
 { "index" : { "_index" : "test", "_type" : "_doc", "_id" : "1" } }
 { "field1" : "value1" }
-{ "delete" : { "_index" : "test", "_type" : "_doc", "_id" : "2" } }
-{ "create" : { "_index" : "test", "_type" : "_doc", "_id" : "3" } }
-{ "field1" : "value3" }
-{ "update" : {"_id" : "1", "_type" : "_doc", "_index" : "test"} }
-{ "doc" : {"field2" : "value2"} }
+{ "index" : { "_index" : "test", "_type" : "_doc", "_id" : "3" } }
+{ "field1" : "value2" }
+...
 ```
 
 ## Development

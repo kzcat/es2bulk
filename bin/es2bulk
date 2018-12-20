@@ -1,0 +1,39 @@
+#! /usr/bin/env ruby
+
+require 'es2bulk'
+require 'optparse'
+require 'json'
+
+class Es2BulkCommand
+  def initialize(argv)
+    index_pattern = nil
+    host = 'localhost'
+    port = 9200
+    without_id = false
+    OptionParser.new do |opt|
+      opt.on('-i', '--index_pattern PATTERN') { |v| index_pattern = v }
+      opt.on('-h', '--host ES_HOST') { |v| host = v }
+      opt.on('-p', '--port ES_PORT', Integer) { |v| port = v }
+      opt.on('--without-id') { without_id = true }
+      begin
+        opt.parse!(argv)
+      rescue OptionParser::ParseError => e
+        STDERR.puts e.message
+        abort opt.help
+      end
+      abort opt.help unless index_pattern
+    end
+    @es2bulk = Es2Bulk.new(index_pattern, host, port, without_id)
+  end
+
+  def run
+    @es2bulk.generate do |meta, body|
+      puts meta.to_json
+      puts body.to_json
+    end
+  rescue Es2Bulk::Error => e
+    abort e.message
+  end
+end
+
+Es2BulkCommand.new(ARGV).run
